@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Update Profile | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/update_profile.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            {% if user.role|lower == "admin" %}
+            <a href="{{ url_for('admin_profile') }}" class="back-btn">
+                ← My Profile
+            </a>
+            {% else %}
+            <a href="{{ url_for('my_profile') }}" class="back-btn">
+                ← My Profile
+            </a>
+            {% endif %}
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="page-heading">
+            <span>ACCOUNT SETTINGS</span>
+            <h1>Update Profile</h1>
+            <p>Keep your account and contact information up to date.</p>
+        </section>
+
+        <section class="update-card">
+            <div class="card-heading">
+                <div class="heading-icon">✎</div>
+
+                <div>
+                    <h2>Profile Information</h2>
+                    <p>Update the fields below and save your changes.</p>
+                </div>
+            </div>
+
+            <form method="POST" class="profile-form">
+                <div class="input-group">
+                    <label for="name">
+                        {% if role == "employee" %}
+                        Employee Name
+                        {% elif user.role|lower == "admin" %}
+                        Admin Name
+                        {% else %}
+                        Manager Name
+                        {% endif %}
+                    </label>
+
+                    <input type="text"
+                        id="name"
+
+                        {% if role == "employee" %}
+                        name="employee_name"
+                        value="{{ profile.employee_name }}"
+                        {% else %}
+                        name="manager_name"
+                        value="{{ profile.manager_name }}"
+                        {% endif %}
+
+                        required>
+                </div>
+
+                <div class="input-group">
+                    <label for="code">
+                        {% if role == "employee" %}
+                        Employee Code
+                        {% elif user.role|lower == "admin" %}
+                        Admin Code
+                        {% else %}
+                        Manager Code
+                        {% endif %}
+                    </label>
+
+                    <input type="text"
+                        id="code"
+
+                        {% if role == "employee" %}
+                        value="{{ profile.employee_code }}"
+                        {% else %}
+                        value="{{ profile.manager_code }}"
+                        {% endif %}
+
+                        readonly>
+                </div>
+
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+
+                        <input type="email"
+                            id="email"
+                            name="email"
+                            value="{{ profile.email }}"
+                            required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="phone_number">Phone Number</label>
+
+                        <input type="text"
+                            id="phone_number"
+                            name="phone_number"
+                            maxlength="10"
+                            pattern="[0-9]{10}"
+                            oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,10)"
+                            value="{{ profile.phone_number }}"
+                            required>
+                    </div>
+                </div>
+
+                {% if role == "employee" %}
+                <div class="input-group">
+                    <label for="reporting_manager">Reporting Manager</label>
+
+                    <input type="text"
+                        id="reporting_manager"
+                        value="{{ manager.manager_name }}"
+                        readonly>
+                </div>
+                {% endif %}
+
+                <div class="form-actions">
+                    {% if user.role|lower == "admin" %}
+                    <a href="{{ url_for('admin_profile') }}" class="cancel-btn">
+                        Cancel
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('my_profile') }}" class="cancel-btn">
+                        Cancel
+                    </a>
+                    {% endif %}
+
+                    <button type="submit" class="save-btn">
+                        Update Profile
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+
+</html>

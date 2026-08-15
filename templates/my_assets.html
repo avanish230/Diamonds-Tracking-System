@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Diamonds | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/my_assets.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('manager_dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="page-heading">
+            <div>
+                <span>MANAGER INVENTORY</span>
+                <h1>My Assigned Kapan</h1>
+                <p>View assigned diamond quantities, return status, and available actions.</p>
+            </div>
+        </section>
+
+        <section class="asset-panel">
+            <div class="table-tools">
+                <div>
+                    <h2>Assigned Diamonds</h2>
+                    <p>Manage your active Kapan assignments.</p>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kapan Number</th>
+                            <th>Assigned Qty</th>
+                            <th>Returned Qty</th>
+                            <th>Remaining Qty</th>
+                            <th>Assign Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for assignment in assignments %}
+                        <tr>
+                            <td>
+                                <div class="kapan-name">
+                                    <span>◇</span>
+                                    <strong>{{ assignment.asset.kapan_number }}</strong>
+                                </div>
+                            </td>
+
+                            <td>{{ assignment.assigned_quantity }}</td>
+                            <td>{{ assignment.returned_quantity }}</td>
+
+                            <td>
+                                <span class="quantity-badge">
+                                    {{ assignment.assigned_quantity - assignment.returned_quantity }}
+                                </span>
+                            </td>
+
+                            <td>{{ assignment.assign_date }}</td>
+
+                            <td>
+                                {% set remaining = assignment.assigned_quantity - assignment.returned_quantity %}
+
+                                {% if remaining == assignment.assigned_quantity %}
+                                <span class="badge assigned">Assigned</span>
+                                {% elif remaining == 0 %}
+                                <span class="badge returned">Returned</span>
+                                {% else %}
+                                <span class="badge partial">Partial Return</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if assignment.status == "Assigned" %}
+                                <div class="action-buttons">
+                                    <a href="{{ url_for('transfer_asset', id=assignment.id) }}"
+                                        class="btn transfer-btn">
+                                        Transfer
+                                    </a>
+
+                                    <a href="{{ url_for('return_to_admin', assignment_id=assignment.id) }}"
+                                        class="btn return-btn">
+                                        Return to Admin
+                                    </a>
+                                </div>
+                                {% else %}
+                                <span class="no-action">Completed</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                No assigned Kapan found.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

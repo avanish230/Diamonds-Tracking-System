@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reject Request | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reject_salary_request.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('manager_salary_requests') }}" class="back-btn">← Back to Requests</a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="form-container">
+            <span class="form-tag">MANAGER PORTAL</span>
+            <h1>Reject Request</h1>
+            <p>Review the request details and provide a reason for rejection.</p>
+
+            <div class="request-info">
+                <div>
+                    <small>Employee</small>
+                    <strong>{{ request_data.employee.employee_name }}</strong>
+                </div>
+                <div>
+                    <small>Request Type</small>
+                    <strong>{{ request_data.request_type }}</strong>
+                </div>
+                <div>
+                    <small>Amount</small>
+                    <strong>₹{{ request_data.amount }}</strong>
+                </div>
+                <div class="reason-block">
+                    <small>Employee Reason</small>
+                    <p>{{ request_data.reason }}</p>
+                </div>
+            </div>
+
+            <form method="POST">
+                <div class="input-group">
+                    <label for="manager_reason">Rejection Reason</label>
+                    <textarea id="manager_reason" name="manager_reason" rows="5"
+                        placeholder="Enter reason for rejecting this request" required></textarea>
+                </div>
+
+                <div class="buttons">
+                    <a href="{{ url_for('manager_salary_requests') }}" class="cancel-btn">Cancel</a>
+                    <button type="submit" class="reject-btn">Reject Request</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/manager_dashboard.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <nav class="header-content">
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+
+            <div class="header-actions">
+                <a href="{{ url_for('logout') }}" class="logout-btn">
+                    Logout
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        {% if manager %}
+        <section class="welcome-section">
+            <span>MANAGER DASHBOARD</span>
+            <h1>Welcome back, {{ session['username'] | capitalize }}</h1>
+            <p>Manage your diamonds, profile, employees, and assignment history from one place.</p>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Select an option to manage your work.</p>
+                </div>
+            </div>
+
+            <div class="action-grid">
+                <a href="{{ url_for('my_profile') }}" class="action-card">
+                    <span class="card-icon">◉</span>
+                    <h3>My Profile</h3>
+                    <p>View and update your profile details.</p>
+                </a>
+
+                <a href="{{ url_for('my_assets') }}" class="action-card">
+                    <span class="card-icon">◇</span>
+                    <h3>My Diamonds</h3>
+                    <p>View diamonds assigned to you.</p>
+                </a>
+
+                <a href="{{ url_for('my_history') }}" class="action-card">
+                    <span class="card-icon">◷</span>
+                    <h3>My History</h3>
+                    <p>Review diamond assignment history.</p>
+                </a>
+
+                <a href="{{ url_for('employee_management') }}" class="action-card">
+                    <span class="card-icon">♙</span>
+                    <h3>Employee Management</h3>
+                    <p>Manage your employees and work.</p>
+                </a>
+            </div>
+        </section>
+
+        {% else %}
+        <section class="profile-alert">
+            <span class="alert-icon">!</span>
+            <h2>Complete Your Profile</h2>
+            <p>Complete your profile before accessing dashboard features.</p>
+
+            <a href="{{ url_for('complete_profile') }}" class="primary-btn">
+                Complete Profile
+            </a>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

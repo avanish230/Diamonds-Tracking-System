@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #172033;
+    background: #f7f9fc;
+}
+
+.top-header {
+    background: linear-gradient(115deg, #071d45, #0f3d91);
+    box-shadow: 0 6px 20px rgba(15, 61, 145, 0.22);
+}
+
+.header-content {
+    max-width: 1100px;
+    min-height: 76px;
+    margin: auto;
+    padding: 13px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.brand span {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand strong {
+    font-size: 20px;
+}
+
+.brand small {
+    margin-top: 2px;
+    color: #c9dbff;
+    font-size: 11px;
+}
+
+.back-btn {
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    color: #0f3d91;
+    background: #fff;
+}
+
+.page-content {
+    min-height: calc(100vh - 76px);
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 620px;
+}
+
+.form-tag {
+    display: inline-block;
+    margin-bottom: 13px;
+    color: #0f3d91;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.form-container h1 {
+    margin-bottom: 10px;
+    font-size: 35px;
+}
+
+.form-container > p {
+    margin-bottom: 27px;
+    color: #667085;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.request-info {
+    margin-bottom: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.request-info > div {
+    padding: 17px;
+    border-right: 1px solid #e2e8f0;
+}
+
+.request-info > div:last-child {
+    border-right: 0;
+}
+
+.request-info small {
+    display: block;
+    margin-bottom: 6px;
+    color: #667085;
+    font-size: 11px;
+}
+
+.request-info strong {
+    color: #172033;
+    font-size: 14px;
+}
+
+.request-info .reason-block {
+    grid-column: 1 / -1;
+    border-top: 1px solid #e2e8f0;
+    border-right: 0;
+    background: #f8fafc;
+}
+
+.reason-block p {
+    color: #475467;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+form {
+    display: grid;
+    gap: 20px;
+}
+
+.input-group {
+    display: grid;
+    gap: 8px;
+}
+
+label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dfe5ed;
+    border-radius: 9px;
+    outline: none;
+    color: #172033;
+    background: #fff;
+    font: inherit;
+    resize: vertical;
+    transition: 0.2s;
+}
+
+textarea:focus {
+    border-color: #0f3d91;
+    box-shadow: 0 0 0 4px rgba(15, 61, 145, 0.1);
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 11px;
+}
+
+.cancel-btn,
+.reject-btn {
+    height: 51px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 9px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.cancel-btn {
+    color: #0f3d91;
+    background: #eef4ff;
+}
+
+.cancel-btn:hover {
+    background: #dce8ff;
+}
+
+.reject-btn {
+    color: #fff;
+    background: #b42318;
+    box-shadow: 0 10px 24px rgba(180, 35, 24, 0.18);
+}
+
+.reject-btn:hover {
+    background: #8f1911;
+    transform: translateY(-2px);
+}
+
+.alert,
+.message,
+.flash-message {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border: 1px solid #b9cef8;
+    border-radius: 8px;
+    color: #0f3d91;
+    background: #eef4ff;
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .header-content {
+        padding: 12px 18px;
+    }
+
+    .brand small {
+        display: none;
+    }
+
+    .brand img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .brand strong {
+        font-size: 18px;
+    }
+
+    .back-btn {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+
+    .page-content {
+        padding: 45px 20px;
+    }
+
+    .form-container h1 {
+        font-size: 30px;
+    }
+
+    .request-info {
+        grid-template-columns: 1fr;
+    }
+
+    .request-info > div {
+        border-right: 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .request-info .reason-block {
+        border-bottom: 0;
+    }
+}

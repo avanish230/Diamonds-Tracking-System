@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Dashboard | Sonal Impex</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/employee_dashboard.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <nav class="header-content">
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+        </nav>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="welcome-section">
+            <span class="section-tag">EMPLOYEE DASHBOARD</span>
+            <h1>Welcome, {{ employee.employee_name }}</h1>
+            <p>
+                Reporting Manager:
+                <strong>{{ manager.manager_name }}</strong>
+            </p>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <h2>Quick Actions</h2>
+                <p>Access your profile and daily work records from one place.</p>
+            </div>
+
+            <div class="action-grid">
+                <a href="{{ url_for('my_profile') }}" class="action-card">
+                    <span class="card-icon">◉</span>
+
+                    <div>
+                        <h3>My Profile</h3>
+                        <p>View your personal profile details.</p>
+                    </div>
+                </a>
+
+                <a href="{{ url_for('my_daily_work') }}" class="action-card">
+                    <span class="card-icon">◷</span>
+
+                    <div>
+                        <h3>My Daily Work</h3>
+                        <p>View your daily work history and records.</p>
+                    </div>
+                </a>
+
+
+                <a href="{{ url_for('salary_request') }}" class="action-card">
+                    <span class="card-icon">₹</span>
+
+                    <div>
+                        <h3>Salary / Advance</h3>
+                        <p> Send salary or advance request. </p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+
+</html>

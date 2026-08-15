@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Manager | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_manager.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <a href="{{ url_for('manage_manager') }}" class="back-btn">← Back to Managers</a>
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+    </header>
+
+    <main class="page-content">
+        <section class="form-container">
+            <span class="form-tag">MANAGER MANAGEMENT</span>
+            <h1>Add Manager</h1>
+            <p>Create a new manager account for the system.</p>
+
+            {% include "message.html" %}
+
+            <form method="POST">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username"
+                        placeholder="Enter username" required autocomplete="username">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+
+                    <div class="password-box">
+                        <input type="password" id="password" name="password"
+                            placeholder="Create password" required autocomplete="new-password">
+
+                        <button type="button" class="password-toggle"
+                            onclick="togglePassword('password', this)"
+                            aria-label="Show password">
+                            👁
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Add Manager</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</body>
+</html>

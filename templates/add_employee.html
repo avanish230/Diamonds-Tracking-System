@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/add_employee.css') }}">
+
+    <script defer src="{{ url_for('static', filename='js/register.js') }}"></script>
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('employee_management') }}" class="back-btn">
+                ← Employee Management
+            </a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="form-layout">
+            <div class="form-intro">
+                <span>EMPLOYEE MANAGEMENT</span>
+                <h1>Add New Employee</h1>
+                <p>Create an employee login account. The employee must complete their profile after login.</p>
+            </div>
+
+            <section class="form-card">
+                <div class="form-card-heading">
+                    <h2>Employee Account Details</h2>
+                    <p>Enter a username and secure password.</p>
+                </div>
+
+                <form method="POST">
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" name="username"
+                            placeholder="Enter username" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+
+                        <div class="password-box">
+                            <input id="password" type="password" name="password"
+                                placeholder="Minimum 8 characters"
+                                minlength="8" required>
+
+                            <span class="eye"
+                                onclick="togglePassword('password', this)"
+                                role="button"
+                                aria-label="Show or hide password">
+                                👁
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit">Add Employee</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

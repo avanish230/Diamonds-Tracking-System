@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer History | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/transfer_history.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">← Dashboard</a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <section class="page-heading">
+            <div>
+                <span class="section-tag">DIAMOND TRACKING</span>
+                <h1>Transfer History</h1>
+                <p>Track every diamond transfer between company managers.</p>
+            </div>
+        </section>
+
+        <section class="history-panel">
+            <form method="GET" class="filter-form">
+                <div class="field search-field">
+                    <label for="search">Search Kapan</label>
+                    <input id="search" type="text" name="search"
+                        placeholder="Enter Kapan Number"
+                        value="{{ request.args.get('search', '') }}">
+                </div>
+
+                <div class="field">
+                    <label for="from_date">From Date</label>
+                    <input id="from_date" type="date" name="from_date"
+                        value="{{ request.args.get('from_date', '') }}">
+                </div>
+
+                <div class="field">
+                    <label for="to_date">To Date</label>
+                    <input id="to_date" type="date" name="to_date"
+                        value="{{ request.args.get('to_date', '') }}">
+                </div>
+
+                <div class="filter-actions">
+                    <button type="submit">Search</button>
+                    <a href="{{ url_for('transfer_history') }}" class="reset-btn">Reset</a>
+                </div>
+            </form>
+
+            <div class="table-tools">
+                <div>
+                    <h2>Transfer Records</h2>
+                    <p>Page {{ transfers.page }} of {{ transfers.pages }}</p>
+                </div>
+                <span class="record-count">{{ transfers.total }} Total Transfers</span>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Kapan Number</th>
+                            <th>Quantity</th>
+                            <th>From Manager</th>
+                            <th>To Manager</th>
+                            <th>Transfer Date</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for transfer in transfers.items %}
+                        <tr>
+                            <td>{{ transfers.page * transfers.per_page - transfers.per_page + loop.index }}</td>
+                            <td><span class="kapan-badge">{{ transfer.asset.kapan_number }}</span></td>
+                            <td><strong>{{ transfer.quantity }}</strong></td>
+                            <td>{{ transfer.from_manager.manager_name }}</td>
+                            <td>{{ transfer.to_manager.manager_name }}</td>
+                            <td>{{ transfer.action_date }}</td>
+                            <td>{{ transfer.reason }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" class="empty-state">
+                                No transfer history found for the selected filters.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if transfers.pages > 1 %}
+            <div class="pagination">
+                {% if transfers.has_prev %}
+                <a href="{{ url_for('transfer_history',
+                    page=transfers.prev_num,
+                    search=request.args.get('search'),
+                    from_date=request.args.get('from_date'),
+                    to_date=request.args.get('to_date')) }}">
+                    ← Previous
+                </a>
+                {% endif %}
+
+                {% for page_num in transfers.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        {% if page_num == transfers.page %}
+                        <span class="active">{{ page_num }}</span>
+                        {% else %}
+                        <a href="{{ url_for('transfer_history',
+                            page=page_num,
+                            search=request.args.get('search'),
+                            from_date=request.args.get('from_date'),
+                            to_date=request.args.get('to_date')) }}">
+                            {{ page_num }}
+                        </a>
+                        {% endif %}
+                    {% else %}
+                    <span class="dots">…</span>
+                    {% endif %}
+                {% endfor %}
+
+                {% if transfers.has_next %}
+                <a href="{{ url_for('transfer_history',
+                    page=transfers.next_num,
+                    search=request.args.get('search'),
+                    from_date=request.args.get('from_date'),
+                    to_date=request.args.get('to_date')) }}">
+                    Next →
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

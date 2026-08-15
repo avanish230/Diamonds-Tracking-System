@@ -1,0 +1,46 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+env/
+venv/
+.venv/
+
+# Flask
+instance/
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Exported reports (Excel/PDF tumhare app se generate hote hain)
+*.xlsx
+*.pdf
+!requirements.txt
+
+# Uploaded/static generated files (agar koi user-uploaded assets hain)
+uploads/
+static/uploads/

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Kapan | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_asset.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <a href="{{ url_for('admin_dashboard') }}" class="back-btn">← Dashboard</a>
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+    </header>
+
+    <main class="page-content">
+        <section class="form-container">
+            <span class="form-tag">DIAMOND MANAGEMENT</span>
+            <h1>Add New Kapan</h1>
+            <p>Add the Kapan number and its total quantity to create a new diamond record.</p>
+
+            {% include "message.html" %}
+
+            <form method="POST">
+                <div class="input-group">
+                    <label for="kapan_number">Kapan Number</label>
+                    <input type="text" id="kapan_number" name="kapan_number"
+                        placeholder="Enter Kapan Number" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="total_quantity">Total Quantity</label>
+                    <input type="number" id="total_quantity" name="total_quantity"
+                        placeholder="Enter Total Quantity" min="1" required>
+                </div>
+
+                <button type="submit">Add Kapan</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

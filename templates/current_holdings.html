@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Holdings | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/current_holdings.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="page-heading">
+            <div>
+                <span>DIAMOND TRACKING</span>
+                <h1>Current Holdings</h1>
+                <p>View all currently assigned Kapan quantities and their respective managers.</p>
+            </div>
+        </section>
+
+        <section class="holding-panel">
+            <form method="GET" class="search-box">
+                <input type="text"
+                    name="search"
+                    placeholder="Search Kapan, Manager or Manager Code"
+                    value="{{ search }}">
+
+                <button type="submit">Search</button>
+
+                <a href="{{ url_for('current_holdings') }}" class="reset-btn">
+                    Reset
+                </a>
+            </form>
+
+            <div class="table-tools">
+                <p>
+                    Page <strong>{{ holdings.page }}</strong>
+                    of <strong>{{ holdings.pages }}</strong>
+                </p>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Kapan Number</th>
+                            <th>Manager Name</th>
+                            <th>Manager Code</th>
+                            <th>Assigned Qty</th>
+                            <th>Returned Qty</th>
+                            <th>Remaining Qty</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if holdings.items %}
+                            {% for item in holdings.items %}
+                            <tr>
+                                <td>
+                                    {{ loop.index + ((holdings.page - 1) * holdings.per_page) }}
+                                </td>
+
+                                <td>
+                                    <div class="kapan-name">
+                                        <span>◇</span>
+                                        <strong>{{ item.asset.kapan_number }}</strong>
+                                    </div>
+                                </td>
+
+                                <td>{{ item.manager.manager_name }}</td>
+                                <td>{{ item.manager.manager_code }}</td>
+                                <td>{{ item.assigned_quantity }}</td>
+                                <td>{{ item.returned_quantity }}</td>
+
+                                <td>
+                                    <span class="quantity-badge">
+                                        {{ item.assigned_quantity - item.returned_quantity }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="7" class="empty-state">
+                                    No current holdings found.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if holdings.pages > 1 %}
+            <div class="pagination">
+                {% if holdings.has_prev %}
+                <a href="{{ url_for(
+                    'current_holdings',
+                    page=holdings.prev_num,
+                    search=search
+                ) }}">
+                    ← Previous
+                </a>
+                {% endif %}
+
+                <span class="active">{{ holdings.page }}</span>
+
+                {% if holdings.has_next %}
+                <a href="{{ url_for(
+                    'current_holdings',
+                    page=holdings.next_num,
+                    search=search
+                ) }}">
+                    Next →
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+    <main class="login-page">
+        <a href="{{ url_for('home') }}" class="top-brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+
+        <section class="login-card">
+            <div class="card-visual">
+                <img src="{{ url_for('static', filename='image/final-diamond.jpg') }}"
+                    alt="Finished Diamond">
+
+                <div class="visual-overlay">
+                    <span>SONAL IMPEX • DTS</span>
+                    <h1>Smart Diamond Tracking</h1>
+                    <p>Securely manage diamond records, employee allocations, and complete asset history.</p>
+
+                    <div class="visual-points">
+                        <small>✓ Secure</small>
+                        <small>✓ Centralized</small>
+                        <small>✓ Reliable</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-form">
+                <div class="form-heading">
+                    <div class="logo-wrap">
+                        <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                    </div>
+
+                    <span class="form-tag">ACCOUNT LOGIN</span>
+                    <h2>Welcome Back!</h2>
+                    <p>Enter your details below to login into your account.</p>
+                </div>
+
+                {% include "message.html" %}
+
+                <form action="{{ url_for('login') }}" method="POST" class="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username"
+                            placeholder="Enter your username" required autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="password-field">
+                            <input type="password" id="password" name="password"
+                                placeholder="Enter your password" required autocomplete="current-password">
+
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('password', this)"
+                                aria-label="Show password">
+                                👁
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="primary-button">Login to System</button>
+                </form>
+
+                <p class="register-text">
+                    Don't have an account?
+                    <a href="{{ url_for('register') }}">Register</a>
+                </p>
+
+                <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</body>
+
+</html>

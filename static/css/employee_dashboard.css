@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    color: #172033;
+    background: #f7f9fc;
+}
+
+.top-header {
+    background: linear-gradient(115deg, #071d45, #0f3d91);
+    box-shadow: 0 6px 20px rgba(15, 61, 145, 0.22);
+}
+
+.header-content {
+    max-width: 1400px;
+    min-height: 76px;
+    margin: auto;
+    padding: 13px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.brand span {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand strong {
+    font-size: 20px;
+}
+
+.brand small {
+    margin-top: 2px;
+    color: #c9dbff;
+    font-size: 11px;
+}
+
+.logout-btn {
+    padding: 10px 17px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    color: #0f3d91;
+    background: #fff;
+}
+
+.page-content {
+    max-width: 1400px;
+    min-height: calc(100vh - 76px);
+    margin: auto;
+    padding: 55px 35px 80px;
+}
+
+.welcome-section {
+    margin-bottom: 42px;
+}
+
+.section-tag {
+    color: #0f3d91;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.welcome-section h1 {
+    margin: 10px 0;
+    color: #10254e;
+    font-size: 36px;
+}
+
+.welcome-section p {
+    color: #667085;
+    font-size: 15px;
+}
+
+.welcome-section p strong {
+    color: #172b56;
+}
+
+.dashboard-section {
+    padding: 27px;
+    border: 1px solid #e5eaf2;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(15, 61, 145, 0.08);
+}
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    margin-bottom: 6px;
+    color: #172b56;
+    font-size: 22px;
+}
+
+.section-heading p {
+    color: #74809a;
+    font-size: 14px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 17px;
+}
+
+.action-card {
+    min-height: 130px;
+    padding: 22px;
+    border: 1px solid #e2e9f3;
+    border-radius: 12px;
+    color: inherit;
+    background: #fff;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 15px;
+    transition: 0.2s;
+}
+
+.action-card:hover {
+    border-color: #a9c7f7;
+    background: #f8fbff;
+    box-shadow: 0 12px 25px rgba(15, 61, 145, 0.1);
+    transform: translateY(-3px);
+}
+
+.card-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    color: #0f3d91;
+    background: #eaf2ff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.action-card h3 {
+    margin-bottom: 6px;
+    color: #172b56;
+    font-size: 17px;
+}
+
+.action-card p {
+    color: #74809a;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.action-card b {
+    color: #0f3d91;
+    font-size: 23px;
+}
+
+.footer {
+    padding: 22px 20px;
+    border-top: 1px solid #e2e8f2;
+    color: #6d788d;
+    background: #fff;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #0f3d91;
+}
+
+.footer small {
+    font-size: 11px;
+}
+
+.alert,
+.message,
+.flash-message {
+    margin-bottom: 22px;
+    padding: 12px 14px;
+    border: 1px solid #b9cef8;
+    border-radius: 8px;
+    color: #0f3d91;
+    background: #eef4ff;
+    font-size: 13px;
+}
+
+@media (max-width: 720px) {
+    .header-content {
+        padding: 12px 18px;
+    }
+
+    .brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand strong {
+        font-size: 17px;
+    }
+
+    .brand small {
+        display: none;
+    }
+
+    .page-content {
+        padding: 40px 18px 60px;
+    }
+
+    .welcome-section {
+        margin-bottom: 30px;
+    }
+
+    .welcome-section h1 {
+        font-size: 29px;
+    }
+
+    .dashboard-section {
+        padding: 17px;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-card {
+        min-height: 110px;
+        padding: 17px;
+    }
+}
+
+@media (max-width: 420px) {
+    .header-content {
+        gap: 10px;
+    }
+
+    .brand strong {
+        font-size: 15px;
+    }
+
+    .logout-btn {
+        padding: 9px 12px;
+    }
+}

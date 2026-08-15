@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    color: #172033;
+    background: #f7f9fc;
+}
+
+.top-header {
+    background: linear-gradient(115deg, #071d45, #0f3d91);
+    box-shadow: 0 6px 20px rgba(15, 61, 145, 0.22);
+}
+
+.header-content {
+    max-width: 1400px;
+    min-height: 76px;
+    margin: auto;
+    padding: 13px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.brand span {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand strong {
+    font-size: 20px;
+}
+
+.brand small {
+    margin-top: 2px;
+    color: #c9dbff;
+    font-size: 11px;
+}
+
+.back-btn {
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    color: #0f3d91;
+    background: #fff;
+}
+
+.page-content {
+    max-width: 1100px;
+    min-height: calc(100vh - 76px);
+    margin: auto;
+    padding: 55px 35px 80px;
+}
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.page-heading span {
+    color: #0f3d91;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.page-heading h1 {
+    margin: 9px 0;
+    color: #10254e;
+    font-size: 34px;
+}
+
+.page-heading p {
+    color: #667085;
+    font-size: 15px;
+}
+
+.work-panel {
+    padding: 25px;
+    border: 1px solid #e5eaf2;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(15, 61, 145, 0.08);
+}
+
+.table-tools {
+    margin-bottom: 18px;
+}
+
+.table-tools h2 {
+    margin-bottom: 5px;
+    color: #172b56;
+    font-size: 20px;
+}
+
+.table-tools p {
+    color: #74809a;
+    font-size: 13px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    border: 1px solid #e5eaf2;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    min-width: 570px;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 15px;
+    color: #526071;
+    background: #f8fafc;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 15px;
+    border-top: 1px solid #edf0f4;
+    color: #45546d;
+    font-size: 13px;
+}
+
+tbody tr:hover {
+    background: #f8fbff;
+}
+
+.employee-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.employee-name span {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #0f3d91;
+    background: #eaf2ff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.send-btn,
+.history-btn {
+    padding: 8px 12px;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.send-btn {
+    background: #16834d;
+}
+
+.send-btn:hover {
+    color: #fff;
+    background: #106b3e;
+}
+
+.history-btn {
+    background: #0f3d91;
+}
+
+.history-btn:hover {
+    color: #fff;
+    background: #092d70;
+}
+
+.empty-state {
+    padding: 42px;
+    color: #667085;
+    text-align: center;
+}
+
+.footer {
+    padding: 22px 20px;
+    border-top: 1px solid #e2e8f2;
+    color: #6d788d;
+    background: #fff;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #0f3d91;
+}
+
+.footer small {
+    font-size: 11px;
+}
+
+@media (max-width: 720px) {
+    .header-content {
+        padding: 12px 18px;
+    }
+
+    .brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand strong {
+        font-size: 17px;
+    }
+
+    .brand small {
+        display: none;
+    }
+
+    .back-btn {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .page-content {
+        padding: 38px 16px 55px;
+    }
+
+    .page-heading h1 {
+        font-size: 28px;
+    }
+
+    table {
+        width: 100%;
+        min-width: 400px;
+        border-collapse: collapse;
+    }
+    .work-panel {
+        padding: 15px;
+    }
+}

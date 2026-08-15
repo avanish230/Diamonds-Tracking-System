@@ -1,0 +1,133 @@
+body {
+
+    background: #eef3fb;
+
+}
+
+.back-btn {
+
+    text-decoration: none;
+
+    background: #0F3D91;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+}
+
+.back-btn:hover {
+
+    color: white;
+
+    background: #082d6b;
+
+}
+
+.profile-card,
+.history-card,
+.total-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12);
+
+}
+
+.profile-card h2 {
+
+    color: #0F3D91;
+
+    font-weight: bold;
+
+}
+
+.history-card h4 {
+
+    margin-bottom: 20px;
+
+    color: #0F3D91;
+
+}
+
+table th {
+
+    background: #0F3D91;
+
+    color: white;
+
+    text-align: center;
+
+}
+
+table td {
+
+    text-align: center;
+
+    vertical-align: middle;
+
+}
+
+.edit-btn {
+
+    background: #198754;
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 6px 14px;
+
+    border-radius: 6px;
+
+}
+
+.edit-btn:hover {
+
+    background: #157347;
+
+    color: white;
+
+}
+
+.total-card {
+
+    background: linear-gradient(135deg, #0F3D91, #2E6BE6);
+
+    color: white;
+
+    text-align: center;
+
+}
+
+.total-card h1 {
+
+    font-size: 48px;
+
+    font-weight: bold;
+
+}
+
+@media(max-width:768px) {
+
+    .profile-card,
+    .history-card,
+    .total-card {
+
+        padding: 18px;
+
+    }
+
+    .total-card h1 {
+
+        font-size: 36px;
+
+    }
+
+}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sonal Impex | Diamond Tracking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                <div class="brand-text">
+                    <span>Sonal Impex</span>
+                    <small>Diamond Tracking System</small>
+                </div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="/login" class="login-btn">Login</a>
+                <a href="/register" class="register-btn">Register</a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content reveal">
+                <span class="hero-tag">SONAL IMPEX • DIAMOND MANAGEMENT</span>
+                <h1>Smart Diamond Tracking System</h1>
+                <p>Manage company diamonds, employee allocations, diamond returns and complete assignment history
+                    through one secure and centralized platform.</p>
+                <div class="hero-buttons">
+                    <a href="/login" class="primary-btn">Login to System</a>
+                    <a href="#features" class="secondary-btn">Explore Features</a>
+                </div>
+                <div class="hero-points">
+                    <span>✓ Secure</span>
+                    <span>✓ Centralized</span>
+                    <span>✓ Reliable</span>
+                </div>
+            </div>
+            <div class="hero-slider reveal">
+                <div class="slider-header">
+                    <span>Diamond Journey</span>
+                    <small>Sonal Impex</small>
+                </div>
+                <div class="slides">
+                    <div class="slide active">
+                        <img src="{{ url_for('static', filename='image/rough-diamond.jpg') }}" alt="Rough Diamond">
+                        <div class="slide-info">
+                            <span>01</span>
+                            <div>
+                                <h3>Rough Diamond</h3>
+                                <p>The journey begins with carefully selected rough diamonds.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="{{ url_for('static', filename='image/diamond-sorting.jpg') }}" alt="Diamond Sorting">
+                        <div class="slide-info">
+                            <span>02</span>
+                            <div>
+                                <h3>Diamond Sorting</h3>
+                                <p>Diamonds are inspected and categorized for processing.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="{{ url_for('static', filename='image/diamond-cutting.jpg') }}" alt="Diamond Cutting">
+                        <div class="slide-info">
+                            <span>03</span>
+                            <div>
+                                <h3>Precision Cutting</h3>
+                                <p>Expert cutting transforms each stone with precision.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="{{ url_for('static', filename='image/diamond-polishing.jpg') }}"
+                            alt="Diamond Polishing">
+                        <div class="slide-info">
+                            <span>04</span>
+                            <div>
+                                <h3>Diamond Polishing</h3>
+                                <p>Professional polishing reveals brilliance and clarity.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <img src="{{ url_for('static', filename='image/final-diamond.jpg') }}" alt="Finished Diamond">
+                        <div class="slide-info">
+                            <span>05</span>
+                            <div>
+                                <h3>Finished Diamond</h3>
+                                <p>The final diamond is ready after careful quality checks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="slider-arrow" id="prevSlide" aria-label="Previous slide">‹</button>
+                    <div class="slider-dots">
+                        <button class="dot active" data-slide="0" aria-label="Slide 1"></button>
+                        <button class="dot" data-slide="1" aria-label="Slide 2"></button>
+                        <button class="dot" data-slide="2" aria-label="Slide 3"></button>
+                        <button class="dot" data-slide="3" aria-label="Slide 4"></button>
+                        <button class="dot" data-slide="4" aria-label="Slide 5"></button>
+                    </div>
+                    <button class="slider-arrow" id="nextSlide" aria-label="Next slide">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="diamond-strip">
+            <p>💎 From Rough Diamond to Finished Product</p>
+            <span>Supporting efficient operations through smarter diamond management.</span>
+        </section>
+
+        <section class="about section" id="about">
+            <div class="section-heading reveal">
+                <span>ABOUT THE SYSTEM</span>
+                <h2>Built for Sonal Impex Operations</h2>
+                <p>A centralized solution designed to simplify and improve the way company diamonds are managed.</p>
+            </div>
+            <div class="about-container">
+                <div class="about-content reveal">
+                    <h3>Better Visibility. Better Control.</h3>
+                    <p>The Sonal Impex Diamond Tracking System provides administrators with a structured way to manage
+                        company diamonds and maintain accurate allocation records.</p>
+                    <p>From diamond registration to assignment, return and reporting, every important activity can be
+                        managed through one centralized platform.</p>
+                    <div class="about-list">
+                        <div><span>✓</span>Centralized Diamond Records</div>
+                        <div><span>✓</span>Employee Management</div>
+                        <div><span>✓</span>Complete Assignment History</div>
+                        <div><span>✓</span>Secure Access Control</div>
+                    </div>
+                </div>
+                <div class="about-card reveal">
+                    <div class="about-icon">💎</div>
+                    <h3>Sonal Impex DTS</h3>
+                    <p>Smart • Secure • Reliable</p>
+                    <div class="mini-features">
+                        <span>Diamonds</span>
+                        <span>Employees</span>
+                        <span>Reports</span>
+                        <span>History</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features section" id="features">
+            <div class="section-heading reveal">
+                <span>SYSTEM FEATURES</span>
+                <h2>Everything Needed to Manage Diamonds</h2>
+                <p>Essential tools for managing diamonds and employee allocations efficiently.</p>
+            </div>
+
+            <div class="feature-grid">
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/diamond-management.jpg') }}"
+                        alt="Diamond Management">
+                    <div class="feature-content">
+                        <h3>Diamond Management</h3>
+                        <p>Manage and organize all company diamonds from one place.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/employee-management.jpg') }}"
+                        alt="Employee Management">
+                    <div class="feature-content">
+                        <h3>Employee Management</h3>
+                        <p>Maintain employee information and department details.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/diamond-assignment.jpg') }}"
+                        alt="Diamond Assignment">
+                    <div class="feature-content">
+                        <h3>Diamond Assignment</h3>
+                        <p>Assign diamonds securely and monitor current ownership.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/history.jpg') }}" alt="History">
+                    <div class="feature-content">
+                        <h3>Assignment History</h3>
+                        <p>Track complete assignment and return history.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/report.jpg') }}" alt="Reports">
+                    <div class="feature-content">
+                        <h3>Reports</h3>
+                        <p>Generate PDF and Excel reports instantly.</p>
+                    </div>
+                </div>
+
+                <div class="feature-card reveal">
+                    <img src="{{ url_for('static', filename='image/security.jpg') }}" alt="Security">
+                    <div class="feature-content">
+                        <h3>Secure Access</h3>
+                        <p>Role-based authentication keeps company data protected.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="benefits section">
+            <div class="benefit-container">
+                <div class="benefit-content reveal">
+                    <span class="section-label">WHY THIS SYSTEM</span>
+                    <h2>Designed for Accuracy and Accountability</h2>
+                    <p>Reduce manual tracking and maintain better visibility over company diamonds throughout their
+                        lifecycle.</p>
+                    <div class="benefit-list">
+                        <div><span>✓</span>
+                            <p>Quick access to diamond information</p>
+                        </div>
+                        <div><span>✓</span>
+                            <p>Complete assignment and return records</p>
+                        </div>
+                        <div><span>✓</span>
+                            <p>Easy employee diamond tracking</p>
+                        </div>
+                        <div><span>✓</span>
+                            <p>Centralized company diamond database</p>
+                        </div>
+                        <div><span>✓</span>
+                            <p>Exportable reports and history</p>
+                        </div>
+                        <div><span>✓</span>
+                            <p>Responsive interface across devices</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="benefit-visual reveal">
+                    <div class="visual-card">
+                        <span>Diamond Visibility</span>
+                        <strong>Complete</strong>
+                    </div>
+                    <div class="visual-card">
+                        <span>History Tracking</span>
+                        <strong>Centralized</strong>
+                    </div>
+                    <div class="visual-card">
+                        <span>Access</span>
+                        <strong>Secure</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="cta-content reveal">
+                <span>SONAL IMPEX DTS</span>
+                <h2>Ready to Manage Company Diamonds Smarter?</h2>
+                <p>Access the centralized Diamond Tracking System and simplify everyday diamond management.</p>
+                <div class="cta-buttons">
+                    <a href="/login" class="cta-primary">Login Now</a>
+                    <a href="/register" class="cta-secondary">Register</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                    <h3>Sonal Impex</h3>
+                </div>
+                <p>A centralized Diamond Tracking System designed for smarter, secure and reliable diamond management.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#features">Features</a>
+            </div>
+            <div class="footer-links">
+                <h4>System</h4>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+                <a href="#features">Diamond Management</a>
+                <a href="#features">Reports</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Sonal Impex</p>
+                <p>Diamond Tracking System</p>
+                <p>Smart • Secure • Reliable</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sonal Impex. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
+</body>
+
+</html>

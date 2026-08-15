@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+</head>
+
+<body>
+    <main class="register-page">
+        <a href="{{ url_for('home') }}" class="top-brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+
+        <section class="register-card">
+            <div class="card-visual">
+                <img src="{{ url_for('static', filename='image/final-diamond.jpg') }}"
+                    alt="Finished Diamond">
+
+                <div class="visual-overlay">
+                    <span>SONAL IMPEX • DTS</span>
+                    <h1>Start tracking with confidence.</h1>
+                    <p>Create your account to securely manage diamond records, allocations, and employee history.</p>
+
+                    <div class="visual-points">
+                        <small>✓ Secure</small>
+                        <small>✓ Centralized</small>
+                        <small>✓ Reliable</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-form">
+                <div class="form-heading">
+                    <span class="form-tag">CREATE ACCOUNT</span>
+                    <h2>Join Sonal Impex</h2>
+                    <p>Create an account to access the Diamond Asset Tracking System.</p>
+                </div>
+
+                {% include "message.html" %}
+
+                <form method="POST" class="register-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username"
+                            placeholder="Enter your username" required autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+
+                        <div class="password-field">
+                            <input type="password" id="password" name="password"
+                                placeholder="Create a password" required autocomplete="new-password">
+
+                            <button type="button" class="password-toggle"
+                                onclick="togglePassword('password', this)"
+                                aria-label="Show password">
+                                👁
+                            </button>
+                        </div>
+                    </div>
+
+                    <fieldset class="form-group role-group">
+                        <legend>Select role</legend>
+
+                        <div class="role-options">
+                            <label class="role-option {% if admin_exists %}disabled-option{% endif %}" for="admin">
+                                <input type="radio" name="role" id="admin" value="admin"
+                                    {% if admin_exists %}disabled{% else %}required{% endif %}>
+                                <span>admin</span>
+                            </label>
+
+                            <label class="role-option" for="manager">
+                                <input type="radio" name="role" id="manager" value="manager">
+                                <span>manager</span>
+                            </label>
+
+                            <label class="role-option" for="employee">
+                                <input type="radio" name="role" id="employee" value="employee">
+                                <span>employee</span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-group manager-group" id="managerDiv">
+                        <label for="manager_id">Select your manager</label>
+
+                        <select name="manager_id" id="manager_id">
+                            <option value="">Choose manager</option>
+
+                            {% for manager in managers %}
+                            <option value="{{ manager.id }}">{{ manager.manager_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button type="submit" class="primary-button">Create Account</button>
+                </form>
+
+                <p class="login-text">
+                    Already have an account?
+                    <a href="{{ url_for('login') }}">Login</a>
+                </p>
+
+                <a href="{{ url_for('home') }}" class="back-link">← Back to Home</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+</body>
+
+</html>

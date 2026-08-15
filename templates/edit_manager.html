@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Manager | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_asset.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <a href="{{ url_for('view_managers') }}" class="back-btn">← Back to Managers</a>
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+    </header>
+
+    <main class="page-content">
+        <section class="form-container">
+            <span class="form-tag">MANAGER MANAGEMENT</span>
+            <h1>Edit Manager</h1>
+            <p>Update the manager details below.</p>
+
+            {% include "message.html" %}
+
+            <form method="POST">
+                <div class="input-group">
+                    <label for="manager_name">Manager Name</label>
+                    <input type="text" id="manager_name" name="manager_name"
+                        value="{{ manager.manager_name }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="manager_code">Manager Code</label>
+                    <input type="text" id="manager_code" name="manager_code"
+                        value="{{ manager.manager_code }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email"
+                        value="{{ manager.email }}" required>
+                </div>
+
+                <div class="buttons">
+                    <a href="{{ url_for('view_managers') }}" class="cancel-btn">Cancel</a>
+                    <button type="submit" class="update-btn">Update Manager</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Diamond | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/assign_asset.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <a href="{{ url_for('admin_dashboard') }}" class="back-btn">← Dashboard</a>
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+            <span>
+                <strong>Sonal Impex</strong>
+                <small>Diamond Tracking System</small>
+            </span>
+        </a>
+    </header>
+
+    <main class="page-content">
+        <section class="form-container">
+            <span class="form-tag">DIAMOND ASSIGNMENT</span>
+            <h1>Send Kapan</h1>
+            <p>Select a Kapan, manager, quantity, and assignment date.</p>
+
+            {% include "message.html" %}
+
+            <form method="POST">
+                <div class="input-group">
+                    <label for="asset_id">Kapan Number</label>
+                    <select id="asset_id" name="asset_id" required>
+                        <option value="">Select Kapan</option>
+
+                        {% for asset in assets %}
+                        <option value="{{ asset.id }}">
+                            {{ asset.kapan_number }} (Available: {{ asset.available_quantity }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="manager_id">Manager</label>
+                    <select id="manager_id" name="manager_id" required>
+                        <option value="">Select Manager</option>
+
+                        {% for manager in managers %}
+                        <option value="{{ manager.id }}">
+                            {{ manager.manager_name }} ({{ manager.manager_code }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="two-fields">
+                    <div class="input-group">
+                        <label for="assigned_quantity">Send Quantity</label>
+                        <input type="number" id="assigned_quantity" name="assigned_quantity"
+                            min="1" placeholder="Enter quantity" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="assign_date">Send Date</label>
+                        <input type="date" id="assign_date" name="assign_date" required>
+                    </div>
+                </div>
+
+                <button type="submit">Send Kapan</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

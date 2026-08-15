@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Sonal Impex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}" alt="Sonal Impex Logo">
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+
+            <div class="profile-menu">
+                <button type="button" class="profile-button" id="profileButton" aria-label="Profile menu">
+                    {{ session.username[0] | upper }}
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown">
+                    <p>{{ session.username }}</p>
+                    <a href="{{ url_for('admin_profile') }}">My Profile</a>
+                    <a href="/logout" class="logout-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+        {% include "message.html" %}
+
+        <section class="welcome-section">
+            <span class="section-tag">ADMIN DASHBOARD</span>
+            <h1>Welcome back, {{ session.username }}</h1>
+            <p>Manage all company diamonds and team activity from one dashboard.</p>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="section-heading">
+                <h2>Quick Actions</h2>
+                <p>Manage assets and managers quickly.</p>
+            </div>
+
+            <div class="action-grid">
+                <a href="/add_asset" class="action-card">
+                    <span class="card-icon">+</span>
+                    <h3>Add Kapan</h3>
+                    <p>Add new company diamonds.</p>
+                </a>
+
+                <a href="/view_assets" class="action-card">
+                    <span class="card-icon">◇</span>
+                    <h3>My Balance</h3>
+                    <p>View company diamonds.</p>
+                </a>
+
+                <a href="/assign_asset" class="action-card">
+                    <span class="card-icon">⇄</span>
+                    <h3>Send diamond</h3>
+                    <p>Send diamonds to managers.</p>
+                </a>
+
+                <a href="/inactive_assets" class="action-card">
+                    <span class="card-icon">×</span>
+                    <h3>Inactive diamond</h3>
+                    <p>Diamonds lost or deactivated.</p>
+                </a>
+
+                <a href="/manage_manager" class="action-card">
+                    <span class="card-icon">♙</span>
+                    <h3>Managers</h3>
+                    <p>Manage company managers.</p>
+                </a>
+
+                <a href="/assignment_history" class="action-card">
+                    <span class="card-icon">◷</span>
+                    <h3>Assignment History</h3>
+                    <p>View overall assignments.</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="dashboard-section history-section">
+            <div class="section-heading">
+                <h2>Management History</h2>
+                <p>Track manager requests and diamond movement.</p>
+            </div>
+
+            <div class="history-grid">
+                <a href="{{ url_for('pending_managers') }}" class="history-card">
+                    <span>01</span>
+                    <div>
+                        <h3>New Requests</h3>
+                        <p>Pending registrations.</p>
+                    </div>
+                    <b>→</b>
+                </a>
+
+                <a href="{{ url_for('current_holdings') }}" class="history-card">
+                    <span>02</span>
+                    <div>
+                        <h3>Current Diamond Holder</h3>
+                        <p>View current diamond ownership.</p>
+                    </div>
+                    <b>→</b>
+                </a>
+
+                <a href="{{ url_for('transfer_history') }}" class="history-card">
+                    <span>03</span>
+                    <div>
+                        <h3>Transfer History</h3>
+                        <p>Track diamond movements.</p>
+                    </div>
+                    <b>→</b>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/admin_dashboard.js') }}"></script>
+</body>
+</html>

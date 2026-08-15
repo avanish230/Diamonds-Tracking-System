@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Daily Work | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/send_daily_work.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('daily_work_employees') }}" class="back-btn">
+                ← Daily Work
+            </a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="form-layout">
+            <div class="form-intro">
+                <span>EMPLOYEE WORK</span>
+                <h1>Send Daily Work</h1>
+                <p>Assign the daily work quantity for the selected employee.</p>
+            </div>
+
+            <section class="form-card">
+                <div class="form-card-heading">
+                    <h2>Work Details</h2>
+                    <p>Fill in the date and quantity to continue.</p>
+                </div>
+
+                <form method="POST">
+                    <div class="input-group">
+                        <label for="employee_name">Employee Name</label>
+                        <input id="employee_name" type="text"
+                            value="{{ employee.employee_name }}" readonly>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="work_date">Date</label>
+                        <input id="work_date" type="date"
+                            name="work_date" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="quantity">Quantity</label>
+                        <input id="quantity" type="number"
+                            name="quantity"
+                            min="1"
+                            placeholder="Enter quantity"
+                            required>
+                    </div>
+
+                    <button type="submit">Send Work</button>
+                </form>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+</html>

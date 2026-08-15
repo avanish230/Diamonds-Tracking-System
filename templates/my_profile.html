@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/my_profile.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            {% if role == "employee" %}
+            <a href="{{ url_for('employee_dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+            {% else %}
+            <a href="{{ url_for('manager_dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+            {% endif %}
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="page-heading">
+            <span>ACCOUNT SETTINGS</span>
+            <h1>My Profile</h1>
+            <p>View and manage your account and contact details.</p>
+        </section>
+
+        <section class="profile-card">
+            <div class="profile-card-header">
+                <div class="profile-avatar">
+                    {% if role == "employee" %}
+                    {{ profile.employee_name[0] | upper }}
+                    {% else %}
+                    {{ profile.manager_name[0] | upper }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    {% if role == "employee" %}
+                    <h2>{{ profile.employee_name }}</h2>
+                    {% else %}
+                    <h2>{{ profile.manager_name }}</h2>
+                    {% endif %}
+
+                    <p>{{ user.role | capitalize }} Account</p>
+                </div>
+            </div>
+
+            <div class="profile-body">
+                <div class="details-heading">
+                    <h3>Profile Details</h3>
+                    <p>Your registered information.</p>
+                </div>
+
+                <div class="profile-list">
+                    <div class="profile-row">
+                        <span class="label">
+                            {% if role == "employee" %}
+                            Employee Name
+                            {% elif user.role|lower == "admin" %}
+                            Admin Name
+                            {% else %}
+                            Manager Name
+                            {% endif %}
+                        </span>
+
+                        <span class="value">
+                            {% if role == "employee" %}
+                            {{ profile.employee_name }}
+                            {% else %}
+                            {{ profile.manager_name }}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="profile-row">
+                        <span class="label">
+                            {% if role == "employee" %}
+                            Employee Code
+                            {% elif user.role|lower == "admin" %}
+                            Admin Code
+                            {% else %}
+                            Manager Code
+                            {% endif %}
+                        </span>
+
+                        <span class="value code-value">
+                            {% if role == "employee" %}
+                            {{ profile.employee_code }}
+                            {% else %}
+                            {{ profile.manager_code }}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="profile-row">
+                        <span class="label">Email Address</span>
+                        <span class="value">{{ profile.email }}</span>
+                    </div>
+
+                    <div class="profile-row">
+                        <span class="label">Phone Number</span>
+                        <span class="value">{{ profile.phone_number }}</span>
+                    </div>
+
+                    <div class="profile-row">
+                        <span class="label">Username</span>
+                        <span class="value">{{ user.username }}</span>
+                    </div>
+
+                    <div class="profile-row">
+                        <span class="label">Role</span>
+                        <span class="value">
+                            <span class="role-badge">{{ user.role | capitalize }}</span>
+                        </span>
+                    </div>
+
+                    {% if role == "employee" %}
+                    <div class="profile-row">
+                        <span class="label">Reporting Manager</span>
+                        <span class="value">{{ manager.manager_name }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="buttons">
+                    <a href="{{ url_for('update_profile') }}" class="update-btn">
+                        Update Profile
+                    </a>
+
+                    <a href="{{ url_for('change_password') }}"
+                        class="change-password-btn">
+                        Change Password
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+
+</html>

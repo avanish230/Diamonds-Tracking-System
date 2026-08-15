@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Diamond History | Sonal Impex</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/my_history.css') }}">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="header-content">
+            <a href="{{ url_for('manager_dashboard') }}" class="back-btn">
+                ← Dashboard
+            </a>
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <img src="{{ url_for('static', filename='image/logo.png') }}"
+                    alt="Sonal Impex Logo">
+
+                <span>
+                    <strong>Sonal Impex</strong>
+                    <small>Diamond Tracking System</small>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <main class="page-content">
+        {% include "message.html" %}
+
+        <section class="page-heading">
+            <div>
+                <span>MANAGER HISTORY</span>
+                <h1>My Diamond History</h1>
+                <p>View every assignment, transfer, and return related to your diamonds.</p>
+            </div>
+        </section>
+
+        <section class="history-panel">
+            <form method="GET" action="{{ url_for('my_history') }}" class="filter-box">
+                <div class="search-field">
+                    <label for="search">Search Records</label>
+
+                    <input type="text"
+                        id="search"
+                        name="search"
+                        placeholder="Search Kapan, manager or reason"
+                        value="{{ request.args.get('search', '') }}">
+                </div>
+
+                <div class="filter-buttons">
+                    <button type="submit" class="search-btn">
+                        Search
+                    </button>
+
+                    <a href="{{ url_for('my_history') }}" class="reset-btn">
+                        Reset
+                    </a>
+                </div>
+            </form>
+
+            <div class="table-tools">
+                <div>
+                    <h2>Diamond Records</h2>
+                    <p>Page {{ history.page }} of {{ history.pages }}</p>
+                </div>
+
+                <span class="record-count">
+                    {{ history.total }} Records
+                </span>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Kapan Number</th>
+                            <th>Quantity</th>
+                            <th>Action</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Date</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in history.items %}
+                        <tr>
+                            <td>
+                                {{ loop.index + ((history.page - 1) * history.per_page) }}
+                            </td>
+
+                            <td>
+                                <div class="kapan-name">
+                                    <span>◇</span>
+                                    <strong>{{ item.asset.kapan_number }}</strong>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="quantity-badge">{{ item.quantity }}</span>
+                            </td>
+
+                            <td>
+                                <span class="action-badge">
+                                    {{ item.action }}
+                                </span>
+                            </td>
+
+                            <td>
+                                {% if item.from_manager %}
+                                {{ item.from_manager.manager_name }}
+                                {% else %}
+                                Admin
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if item.to_manager %}
+                                {{ item.to_manager.manager_name }}
+                                {% else %}
+                                Admin
+                                {% endif %}
+                            </td>
+
+                            <td>{{ item.action_date }}</td>
+                            <td>{{ item.reason or "-" }}</td>
+                        </tr>
+
+                        {% else %}
+                        <tr>
+                            <td colspan="8" class="empty-state">
+                                No diamond history found.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% if history.pages > 1 %}
+            <div class="pagination">
+                {% if history.has_prev %}
+                <a href="{{ url_for(
+                    'my_history',
+                    page=history.prev_num,
+                    search=request.args.get('search'),
+                    action=request.args.get('action')
+                ) }}">
+                    ← Previous
+                </a>
+                {% endif %}
+
+                <span class="active">{{ history.page }}</span>
+
+                {% if history.has_next %}
+                <a href="{{ url_for(
+                    'my_history',
+                    page=history.next_num,
+                    search=request.args.get('search'),
+                    action=request.args.get('action')
+                ) }}">
+                    Next →
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p><strong>Sonal Impex</strong> · Smart · Secure · Reliable</p>
+        <small>© 2026 Sonal Impex. All Rights Reserved.</small>
+    </footer>
+</body>
+
+</html>

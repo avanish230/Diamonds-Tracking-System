@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    color: #172033;
+    background: #f7f9fc;
+}
+
+.top-header {
+    background: linear-gradient(115deg, #071d45, #0f3d91);
+    box-shadow: 0 6px 20px rgba(15, 61, 145, 0.22);
+}
+
+.header-content {
+    max-width: 1400px;
+    min-height: 76px;
+    margin: auto;
+    padding: 13px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+}
+
+.brand span {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand strong {
+    font-size: 20px;
+}
+
+.brand small {
+    margin-top: 2px;
+    color: #c9dbff;
+    font-size: 11px;
+}
+
+.back-btn {
+    padding: 10px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    color: #0f3d91;
+    background: #fff;
+}
+
+.page-content {
+    max-width: 1050px;
+    min-height: calc(100vh - 76px);
+    margin: auto;
+    padding: 65px 35px 80px;
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: 1fr 430px;
+    align-items: center;
+    gap: 75px;
+}
+
+.form-intro span {
+    color: #0f3d91;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.form-intro h1 {
+    margin: 11px 0;
+    color: #10254e;
+    font-size: 36px;
+}
+
+.form-intro p {
+    max-width: 430px;
+    color: #667085;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.form-card {
+    padding: 28px;
+    border: 1px solid #e4eaf4;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 15px 35px rgba(15, 61, 145, 0.1);
+}
+
+.form-card-heading {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e9eef6;
+}
+
+.form-card-heading h2 {
+    margin-bottom: 6px;
+    color: #172b56;
+    font-size: 20px;
+}
+
+.form-card-heading p {
+    color: #74809a;
+    font-size: 13px;
+}
+
+form {
+    padding-top: 22px;
+}
+
+.input-group {
+    margin-bottom: 19px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #42526e;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.input-group input {
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+    border: 1px solid #d5deed;
+    border-radius: 8px;
+    outline: none;
+    color: #172033;
+    background: #f9fbfe;
+    font-size: 14px;
+}
+
+.input-group input:focus {
+    border-color: #0f3d91;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(15, 61, 145, 0.1);
+}
+
+.input-group input[readonly] {
+    color: #5c6b82;
+    background: #eef3fa;
+    cursor: not-allowed;
+}
+
+button {
+    width: 100%;
+    height: 46px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    background: #0f3d91;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #092d70;
+}
+
+.footer {
+    padding: 22px 20px;
+    border-top: 1px solid #e2e8f2;
+    color: #6d788d;
+    background: #fff;
+    text-align: center;
+}
+
+.footer p {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #0f3d91;
+}
+
+.footer small {
+    font-size: 11px;
+}
+
+@media (max-width: 800px) {
+    .header-content {
+        padding: 12px 18px;
+    }
+
+    .brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand strong {
+        font-size: 17px;
+    }
+
+    .brand small {
+        display: none;
+    }
+
+    .back-btn {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
+    .page-content {
+        padding: 45px 18px 60px;
+    }
+
+    .form-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .form-intro h1 {
+        font-size: 29px;
+    }
+
+    .form-card {
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+    }
+}
