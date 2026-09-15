@@ -47,14 +47,14 @@
             <div class="admin-identity">
                 <div class="avatar-ring">
                     <div class="profile-avatar">
-                        {{ manager.manager_name[0] | upper }}
+                        {{ admin.admin_name[0] | upper }}
                     </div>
                 </div>
 
                 <div class="identity-content">
                     <span class="role-label">SYSTEM ADMINISTRATOR</span>
-                    <h2>{{ manager.manager_name }}</h2>
-                    <p>{{ manager.manager_code }}</p>
+                    <h2>{{ admin.admin_name }}</h2>
+                    <p>{{ admin.admin_code }}</p>
                 </div>
 
                 <span class="active-status">
@@ -76,7 +76,7 @@
                     <span class="detail-icon">✉</span>
                     <div>
                         <small>Email Address</small>
-                        <strong>{{ manager.email }}</strong>
+                        <strong>{{ admin.email }}</strong>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                     <span class="detail-icon">☎</span>
                     <div>
                         <small>Phone Number</small>
-                        <strong>{{ manager.phone_number }}</strong>
+                        <strong>{{ admin.phone_number }}</strong>
                     </div>
                 </div>
 

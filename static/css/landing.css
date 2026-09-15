@@ -266,7 +266,7 @@ body {
 
 .slides {
     position: relative;
-    height: 460px;
+    height: 360px;
     border-radius: 15px;
     overflow: hidden;
     background: #eef2f7;
@@ -530,7 +530,8 @@ body {
 }
 
 .feature-grid {
-    max-width: 1300px;
+    max-width: 1000px;
+    height: 750px;
     margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -539,15 +540,18 @@ body {
 
 .feature-card {
     background: #fff;
-    border-radius: 18px;
+    border: 1px solid #08285f;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-    transition: .4s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .feature-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 18px 40px rgba(15, 61, 145, .18);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    border-color: #fff;
+    
 }
 
 .feature-card img {

@@ -244,7 +244,7 @@ def forgot_password():
 
                 If you did not request this, please ignore this email.
 
-                Sonal Impex ATS
+                Sonal Impex DTS
                 """
 
             mail.send(msg)
@@ -388,20 +388,22 @@ def admin_profile():
         return redirect(url_for("login"))
 
     try:
-        user = User.query.filter_by(
-            username=session["username"]).first()
+        user = User.query.filter_by(username=session["username"]).first()
 
         if not user:
             flash("User not found.", "danger")
             return redirect(url_for("login"))
 
-        manager = Manager.query.filter_by(
-            user_id=user.id).first()
+        admin = Admin.query.filter_by(user_id=user.id).first()
+
+        if not admin:
+            flash("Admin profile not completed yet.", "warning")
+            return redirect(url_for("complete_profile"))
 
         return render_template(
             "admin_profile.html",
             user=user,
-            manager=manager)
+            admin=admin)
 
     except Exception as e:
         print("Admin Profile Error:", e)
@@ -1136,7 +1138,7 @@ def export_pdf():
 
         elements.append(
             Paragraph(
-                "Diamond Kapan Tracking System",
+                "SONAL IMPEX",
                 style))
 
         elements.append(
