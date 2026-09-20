@@ -413,7 +413,7 @@ def admin_profile():
 @app.route("/user")
 def manager_dashboard():
 
-    if "username" not in session:
+    if "username" not in session or session["role"] != "manager":
         return redirect(url_for("login"))
 
     try:
@@ -513,7 +513,7 @@ def logout():
 
 @app.route("/add_asset", methods=["GET", "POST"])
 def add_asset():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     if request.method == "POST":
@@ -559,7 +559,7 @@ def add_asset():
 
 @app.route("/view_assets")
 def view_assets():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin"  :
         return redirect(url_for("login"))
 
     try:
@@ -648,7 +648,7 @@ def deactivate_asset(id):
 
 @app.route("/inactive_assets")
 def inactive_assets():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     try:
@@ -837,7 +837,7 @@ def delete_manager(id):
 
 @app.route("/assign_asset", methods=["GET", "POST"])
 def assign_asset():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     try:
@@ -921,7 +921,7 @@ def assign_asset():
 
 @app.route("/assignment_history")
 def assignment_history():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     try:
@@ -993,7 +993,7 @@ def assignment_history():
     
 @app.route("/export_excel")
 def export_excel():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     try:
@@ -1089,7 +1089,7 @@ def export_excel():
         
 @app.route("/export_pdf")
 def export_pdf():
-    if "username" not in session:
+    if "username" not in session  or session["role"] != "admin":
         return redirect(url_for("login"))
 
     try:
@@ -1207,7 +1207,7 @@ def export_pdf():
     
 @app.route("/current_holdings")
 def current_holdings():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "admin":
         return redirect(url_for("login"))
 
     if session["role"] != "admin":
@@ -1395,7 +1395,7 @@ def admin_manager_employees(manager_id):
 
 @app.route("/my_assets")
 def my_assets():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "manager":
         return redirect(url_for("login"))
 
     try:
@@ -1752,7 +1752,7 @@ def complete_profile():
     
 @app.route("/transfer_asset/<int:id>", methods=["GET", "POST"])
 def transfer_asset(id):
-    if "username" not in session:
+    if "username" not in session or session["role"] != "manager":
         return redirect(url_for("login"))
 
     try:
@@ -1889,7 +1889,7 @@ def transfer_asset(id):
     
 @app.route("/return_to_admin/<int:assignment_id>", methods=["GET", "POST"])
 def return_to_admin(assignment_id):
-    if "username" not in session:
+    if "username" not in session or session["role"] != "manager":
         return redirect(url_for("login"))
 
     try:
@@ -2005,7 +2005,7 @@ def return_to_admin(assignment_id):
     
 @app.route("/my_history")
 def my_history():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "manager":
         return redirect(url_for("login"))
 
     try:
@@ -2095,8 +2095,12 @@ def my_profile():
             flash("User not found.", "danger")
             return redirect(url_for("login"))
 
-        # Admin / Manager
-        if user.role.lower() in ["admin", "manager"]:
+        # Admin
+        if user.role.lower() == "admin":
+            return redirect(url_for("admin_profile"))
+
+        # Manager
+        if user.role.lower() == "manager":
 
             manager = Manager.query.filter_by(
                 user_id=user.id
@@ -2128,7 +2132,7 @@ def my_profile():
                     "Please complete your profile first.",
                     "warning"
                 )
-                return redirect(url_for("complete_employee_profile"))
+                return redirect(url_for("complete_profile"))
 
             manager = Manager.query.get(employee.manager_id)
 
@@ -2149,7 +2153,7 @@ def my_profile():
             "danger"
         )
 
-        if session["role"] == "employee":
+        if session.get("role") == "employee":
             return redirect(url_for("employee_dashboard"))
 
         return redirect(url_for("manager_dashboard"))
@@ -2234,7 +2238,69 @@ def update_profile():
             )
 
         # ==========================================
-        # Admin / Manager
+        # Admin
+        # ==========================================
+
+        if user.role.lower() == "admin":
+
+            admin = Admin.query.filter_by(
+                user_id=user.id
+            ).first()
+
+            if not admin:
+                flash(
+                    "Please complete your profile first.",
+                    "warning"
+                )
+                return redirect(url_for("complete_profile"))
+
+            if request.method == "POST":
+
+                admin.admin_name = request.form["admin_name"].strip()
+
+                email = request.form["email"].strip()
+                phone = request.form["phone_number"].strip()
+
+                existing_email = Admin.query.filter(
+                    Admin.email == email,
+                    Admin.id != admin.id
+                ).first()
+
+                if existing_email:
+                    flash(
+                        "Email already exists.",
+                        "danger"
+                    )
+                    return redirect(url_for("update_profile"))
+
+                if not phone.isdigit() or len(phone) != 10:
+                    flash(
+                        "Phone number must be exactly 10 digits.",
+                        "danger"
+                    )
+                    return redirect(url_for("update_profile"))
+
+                admin.email = email
+                admin.phone_number = phone
+
+                db.session.commit()
+
+                flash(
+                    "Profile updated successfully.",
+                    "success"
+                )
+
+                return redirect(url_for("admin_profile"))
+
+            return render_template(
+                "update_profile.html",
+                profile=admin,
+                user=user,
+                role="admin"
+            )
+
+        # ==========================================
+        # Manager
         # ==========================================
 
         manager = Manager.query.filter_by(
@@ -2284,11 +2350,7 @@ def update_profile():
                 "success"
             )
 
-            if user.role.lower() == "admin":
-                return redirect(url_for("admin_profile"))
-
-            else:
-                return redirect(url_for("my_profile"))
+            return redirect(url_for("my_profile"))
 
         return render_template(
             "update_profile.html",
@@ -3251,7 +3313,7 @@ def reject_salary_request(id):
     
 @app.route("/employee_dashboard", methods=["GET", "POST"])
 def employee_dashboard():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "employee":
         return redirect(url_for("login"))
 
     if session["role"] != "employee":
@@ -3297,7 +3359,7 @@ def employee_dashboard():
 
 @app.route("/my_daily_work")
 def my_daily_work():
-    if "username" not in session:
+    if "username" not in session or session["role"] != "employee":
         return redirect(url_for("login"))
 
     if session["role"] != "employee":
@@ -3363,7 +3425,7 @@ def my_daily_work():
 @app.route("/salary_request", methods=["GET", "POST"])
 def salary_request():
 
-    if "username" not in session:
+    if "username" not in session or session["role"] != "employee":
         return redirect(url_for("login"))
 
     if session["role"] != "employee":
@@ -3516,7 +3578,7 @@ def salary_request():
         )
 
         return redirect(
-            url_for("employee_dashboard")
+            url_for("employee_dashboard")   
         )
         
         

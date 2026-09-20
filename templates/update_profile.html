@@ -73,6 +73,9 @@
                         {% if role == "employee" %}
                         name="employee_name"
                         value="{{ profile.employee_name }}"
+                        {% elif role == "admin" %}
+                        name="admin_name"
+                        value="{{ profile.admin_name }}"
                         {% else %}
                         name="manager_name"
                         value="{{ profile.manager_name }}"
@@ -97,6 +100,8 @@
 
                         {% if role == "employee" %}
                         value="{{ profile.employee_code }}"
+                        {% elif role == "admin" %}
+                        value="{{ profile.admin_code }}"
                         {% else %}
                         value="{{ profile.manager_code }}"
                         {% endif %}
