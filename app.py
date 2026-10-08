@@ -337,7 +337,27 @@ def reset_password():
             return redirect(url_for("reset_password"))
 
     return render_template("reset_password.html")
-    
+
+# AUTOMATIC CODE GENERATOR
+def generate_unique_code(model, field, prefix):
+    last_record = model.query.order_by(model.id.desc()).first()
+
+    if last_record:
+        last_id = last_record.id
+    else:
+        last_id = 0
+
+    next_number = last_id + 1
+
+    code = f"{prefix}{next_number:03d}"
+
+    # Extra safety in case code already exists
+    while model.query.filter(field == code).first():
+        next_number += 1
+        code = f"{prefix}{next_number:03d}"
+
+    return code
+ 
 @app.route("/admin")
 def admin_dashboard():
     if "username" not in session:
@@ -789,7 +809,7 @@ def edit_manager(id):
 
         if request.method == "POST":
             manager.manager_name = request.form["manager_name"].strip()
-            manager.manager_code = request.form["manager_code"].strip()
+            #manager.manager_code = request.form["manager_code"].strip()
             manager.email = request.form["email"].strip()
 
             db.session.commit()
@@ -1476,17 +1496,21 @@ def complete_profile():
             if request.method == "POST":
 
                 employee_name = request.form["employee_name"].strip()
-                employee_code = request.form["employee_code"].strip().upper()
+                #employee_code = request.form["employee_code"].strip().upper()
+                employee_code = generate_unique_code(
+                    Employee,
+                    Employee.employee_code,
+                    "EMP")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
 
-                if Employee.query.filter(
-                    Employee.employee_code == employee_code,
-                    Employee.id != employee.id
-                ).first():
+                # if Employee.query.filter(
+                #     Employee.employee_code == employee_code,
+                #     Employee.id != employee.id
+                # ).first():
 
-                    flash("Employee Code already exists.", "danger")
-                    return redirect(url_for("complete_profile"))
+                #     flash("Employee Code already exists.", "danger")
+                #     return redirect(url_for("complete_profile"))
 
                 if Employee.query.filter(
                     Employee.email == email,
@@ -1548,22 +1572,26 @@ def complete_profile():
             if request.method == "POST":
 
                 manager_name = request.form["manager_name"].strip()
-                manager_code = request.form["manager_code"].strip().upper()
+                #manager_code = request.form["manager_code"].strip().upper()
+                manager_code = generate_unique_code(
+                    Manager,
+                    Manager.manager_code,
+                    "MGR")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
 
-                if Manager.query.filter_by(
-                    manager_code=manager_code
-                ).first():
+                # if Manager.query.filter_by(
+                #     manager_code=manager_code
+                # ).first():
 
-                    flash(
-                        "Manager Code already exists.",
-                        "danger"
-                    )
+                #     flash(
+                #         "Manager Code already exists.",
+                #         "danger"
+                #     )
 
-                    return redirect(
-                        url_for("complete_profile")
-                    )
+                #     return redirect(
+                #         url_for("complete_profile")
+                #     )
 
                 if Manager.query.filter_by(
                     email=email
@@ -1636,22 +1664,26 @@ def complete_profile():
             if request.method == "POST":
 
                 admin_name = request.form["admin_name"].strip()
-                admin_code = request.form["admin_code"].strip().upper()
+                #admin_code = request.form["admin_code"].strip().upper()
+                admin_code = generate_unique_code(
+                    Admin,
+                    Admin.admin_code,
+                    "ADM")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
 
-                if Admin.query.filter_by(
-                    admin_code=admin_code
-                ).first():
+                # if Admin.query.filter_by(
+                #     admin_code=admin_code
+                # ).first():
 
-                    flash(
-                        "Admin Code already exists.",
-                        "danger"
-                    )
+                #     flash(
+                #         "Admin Code already exists.",
+                #         "danger"
+                #     )
 
-                    return redirect(
-                        url_for("complete_profile")
-                    )
+                #     return redirect(
+                #         url_for("complete_profile")
+                #     )
 
                 if Admin.query.filter_by(
                     email=email
@@ -2621,9 +2653,18 @@ def add_employee():
             db.session.add(new_user)
             db.session.flush()
 
+            employee_code = generate_unique_code(
+                Employee,
+                Employee.employee_code,
+                "EMP"
+            )
+
             employee = Employee(
                 user_id=new_user.id,
-                manager_id=manager.id)
+                manager_id=manager.id,
+                employee_code=employee_code
+            )
+            
             db.session.add(employee)
             db.session.commit()
             flash(
@@ -2714,18 +2755,18 @@ def edit_employee(id):
 
         if request.method == "POST":
             employee_name = request.form["employee_name"].strip()
-            employee_code = request.form["employee_code"].strip().upper()
+            #employee_code = request.form["employee_code"].strip().upper()
             email = request.form["email"].strip()
             phone_number = request.form["phone_number"].strip()
 
-            existing_code = Employee.query.filter(
-                Employee.employee_code == employee_code,
-                Employee.id != employee.id
-            ).first()
+            # existing_code = Employee.query.filter(
+            #     Employee.employee_code == employee_code,
+            #     Employee.id != employee.id
+            # ).first()
 
-            if existing_code:
-                flash("Employee Code already exists.", "warning")
-                return redirect(url_for("edit_employee", id=id))
+            # if existing_code:
+            #     flash("Employee Code already exists.", "warning")
+            #     return redirect(url_for("edit_employee", id=id))
 
             existing_email = Employee.query.filter(
                 Employee.email == email,
@@ -2737,7 +2778,7 @@ def edit_employee(id):
                 return redirect(url_for("edit_employee", id=id))
 
             employee.employee_name = employee_name
-            employee.employee_code = employee_code
+            #employee.employee_code = employee_code
             employee.email = email
             employee.phone_number = phone_number
 

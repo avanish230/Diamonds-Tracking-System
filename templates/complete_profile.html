@@ -81,32 +81,6 @@
                         required>
                 </div>
 
-                <div class="input-group">
-                    <label for="code">
-                        {% if session["role"] == "employee" %}
-                        Employee Code
-                        {% elif session["role"] == "admin" %}
-                        Admin Code
-                        {% else %}
-                        Manager Code
-                        {% endif %}
-                    </label>
-
-                    <input type="text"
-                        id="code"
-
-                        {% if session["role"] == "employee" %}
-                        name="employee_code"
-                        {% elif session["role"] == "admin"%}
-                        name="admin_code"
-                        {% else %}
-                        name="manager_code"
-                        {% endif %}
-
-                        placeholder="Enter your code"
-                        required>
-                </div>
-
                 <div class="form-grid">
                     <div class="input-group">
                         <label for="email">Email Address</label>
