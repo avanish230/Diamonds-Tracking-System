@@ -129,7 +129,6 @@ def register():
             return redirect(url_for("register"))
 
     # GET Request
-    # GET Request
     managers = Manager.query.join(User).filter(
         User.role == "manager",
         User.is_approved == True
@@ -180,17 +179,6 @@ def login():
                     return redirect(url_for("manager_dashboard"))
 
                 elif user.role == "employee":
-                    # employee = Employee.query.filter_by(
-                    #     user_id=user.id
-                    # ).first()
-
-                    # # First Login → Complete Profile
-                    # if (
-                    #     not employee.employee_name or
-                    #     not employee.employee_code or
-                    #     not employee.email or
-                    #     not employee.phone_number):
-                    #     return redirect(url_for("complete_profile"))
                     return redirect(url_for("employee_dashboard"))
             flash("Invalid username or password.", "danger")
 
@@ -809,7 +797,6 @@ def edit_manager(id):
 
         if request.method == "POST":
             manager.manager_name = request.form["manager_name"].strip()
-            #manager.manager_code = request.form["manager_code"].strip()
             manager.email = request.form["email"].strip()
 
             db.session.commit()
@@ -1471,9 +1458,7 @@ def complete_profile():
             flash("User not found.", "danger")
             return redirect(url_for("login"))
 
-        # =========================
         # EMPLOYEE PROFILE
-        # =========================
         if user.role.lower() == "employee":
 
             employee = Employee.query.filter_by(
@@ -1496,21 +1481,12 @@ def complete_profile():
             if request.method == "POST":
 
                 employee_name = request.form["employee_name"].strip()
-                #employee_code = request.form["employee_code"].strip().upper()
                 employee_code = generate_unique_code(
                     Employee,
                     Employee.employee_code,
                     "EMP")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
-
-                # if Employee.query.filter(
-                #     Employee.employee_code == employee_code,
-                #     Employee.id != employee.id
-                # ).first():
-
-                #     flash("Employee Code already exists.", "danger")
-                #     return redirect(url_for("complete_profile"))
 
                 if Employee.query.filter(
                     Employee.email == email,
@@ -1550,9 +1526,7 @@ def complete_profile():
                 role="employee"
             )
 
-        # =========================
         # MANAGER PROFILE
-        # =========================
         elif user.role.lower() == "manager":
 
             manager = Manager.query.filter_by(
@@ -1572,26 +1546,12 @@ def complete_profile():
             if request.method == "POST":
 
                 manager_name = request.form["manager_name"].strip()
-                #manager_code = request.form["manager_code"].strip().upper()
                 manager_code = generate_unique_code(
                     Manager,
                     Manager.manager_code,
                     "MGR")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
-
-                # if Manager.query.filter_by(
-                #     manager_code=manager_code
-                # ).first():
-
-                #     flash(
-                #         "Manager Code already exists.",
-                #         "danger"
-                #     )
-
-                #     return redirect(
-                #         url_for("complete_profile")
-                #     )
 
                 if Manager.query.filter_by(
                     email=email
@@ -1641,10 +1601,8 @@ def complete_profile():
                 "complete_profile.html",
                 role="manager"
             )
-
-        # =========================
+            
         # ADMIN PROFILE
-        # =========================
         elif user.role.lower() == "admin":
 
             admin = Admin.query.filter_by(
@@ -1664,26 +1622,12 @@ def complete_profile():
             if request.method == "POST":
 
                 admin_name = request.form["admin_name"].strip()
-                #admin_code = request.form["admin_code"].strip().upper()
                 admin_code = generate_unique_code(
                     Admin,
                     Admin.admin_code,
                     "ADM")
                 email = request.form["email"].strip()
                 phone_number = request.form["phone_number"].strip()
-
-                # if Admin.query.filter_by(
-                #     admin_code=admin_code
-                # ).first():
-
-                #     flash(
-                #         "Admin Code already exists.",
-                #         "danger"
-                #     )
-
-                #     return redirect(
-                #         url_for("complete_profile")
-                #     )
 
                 if Admin.query.filter_by(
                     email=email
@@ -1734,9 +1678,7 @@ def complete_profile():
                 role="admin"
             )
 
-        # =========================
         # INVALID ROLE
-        # =========================
         else:
 
             flash(
@@ -2206,10 +2148,7 @@ def update_profile():
             flash("User not found.", "danger")
             return redirect(url_for("login"))
 
-        # ==========================================
         # Employee
-        # ==========================================
-
         if user.role.lower() == "employee":
 
             employee = Employee.query.filter_by(
@@ -2269,10 +2208,7 @@ def update_profile():
                 manager=db.session.get(Manager, employee.manager_id)
             )
 
-        # ==========================================
         # Admin
-        # ==========================================
-
         if user.role.lower() == "admin":
 
             admin = Admin.query.filter_by(
@@ -2331,10 +2267,7 @@ def update_profile():
                 role="admin"
             )
 
-        # ==========================================
         # Manager
-        # ==========================================
-
         manager = Manager.query.filter_by(
             user_id=user.id
         ).first()
@@ -2755,18 +2688,8 @@ def edit_employee(id):
 
         if request.method == "POST":
             employee_name = request.form["employee_name"].strip()
-            #employee_code = request.form["employee_code"].strip().upper()
             email = request.form["email"].strip()
             phone_number = request.form["phone_number"].strip()
-
-            # existing_code = Employee.query.filter(
-            #     Employee.employee_code == employee_code,
-            #     Employee.id != employee.id
-            # ).first()
-
-            # if existing_code:
-            #     flash("Employee Code already exists.", "warning")
-            #     return redirect(url_for("edit_employee", id=id))
 
             existing_email = Employee.query.filter(
                 Employee.email == email,
@@ -2778,7 +2701,6 @@ def edit_employee(id):
                 return redirect(url_for("edit_employee", id=id))
 
             employee.employee_name = employee_name
-            #employee.employee_code = employee_code
             employee.email = email
             employee.phone_number = phone_number
 
@@ -3506,7 +3428,6 @@ def salary_request():
             reason = request.form.get("reason", "").strip()
 
             # Validation
-
             if request_type not in ["Salary", "Advance"]:
                 flash(
                     "Please select a valid request type.",
@@ -3555,7 +3476,6 @@ def salary_request():
                 )
 
             # Employee's manager
-
             manager = Manager.query.get(
                 employee.manager_id
             )
@@ -3570,7 +3490,6 @@ def salary_request():
                 )
 
             # Create request
-
             new_request = SalaryRequest(
                 employee_id=employee.id,
                 manager_id=manager.id,

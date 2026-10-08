@@ -5,3 +5,4 @@ PyMySQL
 openpyxl
 reportlab
 python-dotenv
+gunicorn
