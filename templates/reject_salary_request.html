@@ -50,6 +50,7 @@
             </div>
 
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-group">
                     <label for="manager_reason">Rejection Reason</label>
                     <textarea id="manager_reason" name="manager_reason" rows="5"

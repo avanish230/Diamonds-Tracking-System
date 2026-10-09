@@ -29,6 +29,7 @@
             {% include "message.html" %}
 
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-group">
                     <label for="asset_id">Kapan Number</label>
                     <select id="asset_id" name="asset_id" required>

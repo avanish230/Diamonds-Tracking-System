@@ -1,8 +1,8 @@
+import random
+import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file
 from flask_mail import Mail, Message
-import random
 from dotenv import load_dotenv
-import os
 from sqlalchemy import or_, extract, func
 from werkzeug.security import generate_password_hash, check_password_hash
 from models import db, User, Asset, Admin, Manager, Employee, AssetAssignment, AssetHistory, DailyWork, SalaryRequest
@@ -17,11 +17,17 @@ from reportlab.platypus import Paragraph
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_wtf.csrf import CSRFProtect
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
-
+csrf = CSRFProtect(app)
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
@@ -29,7 +35,10 @@ app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
-
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+    default_limits=[])
 mail = Mail(app)
 db.init_app(app)
 
@@ -44,6 +53,7 @@ def add_header(response):
     return response
 
 @app.route("/", methods=["GET", "POST"])
+@limiter.limit("5 per minute;30 per hour")
 def home():
     return render_template("landing.html")
 
@@ -247,6 +257,7 @@ def forgot_password():
     return render_template("forgot_password.html")
 
 @app.route("/verify_otp", methods=["GET", "POST"])
+@limiter.limit("5 per minute;20 per hour")
 def verify_otp():
     if request.method == "POST":
 

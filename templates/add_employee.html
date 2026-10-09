@@ -47,6 +47,7 @@
                 </div>
 
                 <form method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <div class="input-group">
                         <label for="username">Username</label>
                         <input id="username" type="text" name="username"

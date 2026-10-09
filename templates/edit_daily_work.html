@@ -51,6 +51,7 @@
             </div>
 
             <form method="POST" class="work-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-group full-width">
                     <label for="employee_name">Employee Name</label>
 

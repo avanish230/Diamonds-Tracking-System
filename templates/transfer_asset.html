@@ -50,6 +50,7 @@
             </div>
 
             <form method="POST" class="transfer-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="asset-summary">
                     <div class="summary-item">
                         <span>Kapan Number</span>

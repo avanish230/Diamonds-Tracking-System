@@ -26,6 +26,7 @@
             {% include "message.html" %}
 
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label for="otp">One-Time Password</label>
                 <input type="text" id="otp" name="otp"
                     placeholder="Enter OTP" required autocomplete="one-time-code">

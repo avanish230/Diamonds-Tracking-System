@@ -29,6 +29,7 @@
             {% include "message.html" %}
 
             <form method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <div class="input-group">
                     <label for="manager_name">Manager Name</label>
                     <input type="text" id="manager_name" name="manager_name"
